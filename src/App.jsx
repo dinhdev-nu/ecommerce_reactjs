@@ -1,10 +1,12 @@
-import { useState } from 'react'
 import HomePage from './pages/HomePage'
+import styles from './styles/App.module.scss'
 
 function App() {
 
   return (
-    <HomePage/>
+    <div className={styles.container}>
+      <HomePage/>
+    </div>
   )
 }
 

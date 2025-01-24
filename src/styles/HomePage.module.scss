@@ -1,0 +1,27 @@
+.container {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Hoặc kích thước của phần cần hiển thị */
+    overflow: hidden; /* Đảm bảo phần tử không bị tràn */
+}
+
+.container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../assets/backgroundimage.png'); /* Đường dẫn tới ảnh nền */
+    background-repeat: no-repeat;
+    background-size: 100% 100%; /* Hoặc 100% 100% */
+    filter: blur(10px); /* Làm mờ background */
+    z-index: -1; /* Đẩy xuống dưới nội dung */
+    opacity: 0.4; /* Giảm độ rõ của ảnh (nếu muốn) */
+}
+
+
+.content{
+    margin: 0 auto;
+    width: 80%;
+}

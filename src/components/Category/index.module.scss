@@ -1,0 +1,24 @@
+.categoryContainer {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  
+  .categoryButton {
+    padding: 10px 20px;
+    background-color: #e0c97b;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .categoryButton:hover {
+    background-color: #d4b96b;
+    transform: scale(1.05);
+  }
+  
