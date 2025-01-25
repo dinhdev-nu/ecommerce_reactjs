@@ -1,12 +1,15 @@
-import HomePage from './pages/HomePage'
+import { Outlet } from 'react-router-dom'
 import styles from './styles/App.module.scss'
+import NavBar from './components/Navbar'
 
 function App() {
 
   return (
-    <div className={styles.container}>
-      <HomePage/>
-    </div>
+    <>
+      <main>
+        <Outlet />
+      </main>
+    </>
   )
 }
 

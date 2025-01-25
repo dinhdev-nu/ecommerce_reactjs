@@ -1,7 +1,8 @@
 import CategoryButtons from "../components/Category/index"
 import HeroSection from "../components/HeroSelection/index"
-import NavBar from "../components/Navbar/index"
 import ProductList from "../components/ProductsList"
+import NavBar from "../components/Navbar"
+import Footer from '../components/Footer'
 import styles from '../styles/HomePage.module.scss'
 
 const HomePage = () => {
@@ -9,10 +10,11 @@ const HomePage = () => {
     return (
         <div className={styles.container}>
             <div className={styles.content}>
-                < NavBar />
+                < NavBar />  
                 < HeroSection />
                 < CategoryButtons />
                 < ProductList />
+                < Footer />
             </div>
         </div>
     )

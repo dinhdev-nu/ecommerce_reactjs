@@ -1,0 +1,62 @@
+/* Main Container */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100vh;
+    color: #333; /* Màu chữ tối để nổi bật trên nền sáng */
+  }
+  
+  .content {
+    .title {
+      margin-top: -20px ;
+      font-size: 8rem;
+      font-weight: 800;
+      color: #b91c1c; /* Màu đỏ nổi bật */
+      text-shadow: 0px 0px 5px #ef4444, 0px 0px 10px #9b2226;
+    }
+  
+    .message {
+      font-size: 1.5rem;
+      margin: 20px 0;
+      color: #1e293b; /* Màu xám đậm */
+    }
+  
+    .button {
+      padding: 12px 25px;
+      font-size: 1rem;
+      text-decoration: none;
+      color: #ffffff; /* Nút chữ trắng */
+      background-color: #2563eb; /* Nút màu xanh dương */
+      border-radius: 50px;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+      transition: 0.3s ease;
+  
+      &:hover {
+        background-color: #1d4ed8; /* Màu xanh đậm hơn khi hover */
+        box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.4);
+      }
+    }
+  }
+  
+  .robot {
+    margin-top: 30px;
+  
+    img {
+      width: 250px;
+      animation: float 3s ease-in-out infinite;
+    }
+  }
+  
+  /* Float Animation */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
