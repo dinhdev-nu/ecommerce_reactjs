@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useRef } from "react";
 import styles from "./index.module.scss";
 import GoogleLogo from "../../assets/google.png";
 import { FaGithub, FaFacebook, FaFacebookMessenger, FaEye} from "react-icons/fa";
+import { useLocation, useParams } from "react-router-dom";
 
 
 const Access = () => {
 
+  const currentUrl = useLocation();
+  
 
   const categories = ["New Collection", "Special Promo", "Casual Bag", "Party Bag"];
   return (

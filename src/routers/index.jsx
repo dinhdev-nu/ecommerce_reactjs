@@ -3,6 +3,7 @@ import App from '../App'
 import NotFoundPage from '../pages/NotFoundPage'
 import HomePage from '../pages/HomePage'
 import Access from '../components/Access'
+import ProductDetail from '../pages/ProductDetail'
 
 const router = createBrowserRouter ([
     {
@@ -16,6 +17,10 @@ const router = createBrowserRouter ([
     {
         path: '/login',
         element: <Access/>
+    },
+    {
+        path: 'product',
+        element: <ProductDetail/>
     },
     {
         path: '*',
