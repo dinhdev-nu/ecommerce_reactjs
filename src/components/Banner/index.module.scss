@@ -1,0 +1,69 @@
+.promotionalSection {
+  padding: 4rem 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.bannerPink, .bannerBlue {
+  border-radius: 10px;
+  padding: 2rem;
+  text-align: center;
+}
+
+.bannerPink {
+  background-color: #fde2e4;
+  color: #b91c1c;
+}
+
+.bannerBlue {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.title {
+  font-size: 1.75rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.description {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.shopNow, .learnMore {
+  background-color: #ef4444;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 20px;
+  font-weight: bold;
+  transition: background 0.3s;
+  border: none;
+  cursor: pointer;
+}
+
+.shopNow:hover {
+  background-color: #dc2626;
+}
+
+.learnMore {
+  background-color: #3b82f6;
+}
+
+.learnMore:hover {
+  background-color: #2563eb;
+}

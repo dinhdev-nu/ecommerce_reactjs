@@ -1,14 +1,16 @@
 import { Outlet } from 'react-router-dom'
-import styles from './styles/App.module.scss'
 import NavBar from './components/Navbar'
+import Footer from './components/Footer'
 
 function App() {
 
   return (
     <>
-      <main>
+      <NavBar />
+      <main style={{ marginTop: '7rem '}}>
         <Outlet />
       </main>
+      <Footer />
     </>
   )
 }

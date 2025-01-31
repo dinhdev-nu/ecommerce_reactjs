@@ -1,34 +1,26 @@
-import React, { useRef } from 'react'
-import styles from './index.module.scss'
-import { useState, useEffect } from "react";
-import { FaSearch } from "react-icons/fa";
+import styles from "./index.module.scss";
 
 const HeroSelection = () => {
-     
-
-    const inputRef = useRef(null);
-    const handleFocus = () => {
-        if (inputRef.current) {
-          inputRef.current.focus(); // Focus vào input
-        }
-        
-      };
-
     return (
-        <div className={styles.hero}>
-            <h1 className={styles.title}>OUR NEW PORDUCT</h1>
-            <div className={styles.searchBar}>
-                <FaSearch className={styles.icon} onClick={handleFocus}/>
-                <input
-                    ref={inputRef}
-                    type="text"
-                    placeholder='Search here ...'
-                    className={styles.input}
+        <section className={styles.heroes}>
+          <div className={styles.container}>
+            <div className={styles.content}>
+              <div className={styles.textContainer}>
+                <h1>Summer Collection 2024</h1>
+                <p>Up to 50% off on selected items</p>
+                <button className={styles.shopButton}>Shop Now</button>
+              </div>
+              <div className={styles.imageContainer}>
+                <img
+                  src="https://images.unsplash.com/photo-1483985988355-763728e1935b"
+                  alt="Hero"
+                  className={styles.heroImage}
                 />
+              </div>
             </div>
-        </div>
-    )
-
-}
-
-export default HeroSelection
+          </div>
+        </section>
+      );
+  };
+  
+  export default HeroSelection;

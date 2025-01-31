@@ -1,77 +1,74 @@
-.div{
-    background-color: aqua;
-    width: 100%;
-    height: 350px;
-    text-align: center;
-    padding: "50px 20px";
-}
-.input{
-    width: 50%;
-    height: 45px;
-    margin: 10px 0;
-    padding: 0 10px;
-    border: 2px solid white;
-    border-radius: 50px;
-    box-sizing: border-box;
-}
-.hero {
-  text-align: center;
-  padding: 50px 20px;
-  background: linear-gradient(to right, #f9f6f2, #fff8ee);
-  margin-top: 20px;
-}
+.heroes {
+  background: linear-gradient(to right, #3b82f6, #9333ea);
+  color: white;
+  padding-top: 1rem;
 
-.title {
-  font-size: 36px;
-  font-weight: bold;
-  color: #333;
-}
-
-.searchBar {
-  margin: 0 auto;
-  width: 40%;
-  display: flex;
-  align-items: center;
-  background-color: #fff; /* Nền trắng */
-  border: 2px solid #e0e0e0; /* Đường viền nhẹ */
-  border-radius: 30px; /* Góc bo mềm mại */
-  padding: 5px 20px 5px 5px;
-  height: 40px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng */
-  transition: 0.3s ease-in-out;
-
-  &:hover {
-    border-color: #ffa500; /* Đổi màu viền khi hover */
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Tăng đổ bóng khi hover */
+  .container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 4rem 1rem;
   }
 
-  .icon {
-    font-size: 1.5rem;
-    color: #9e9e9e; /* Màu biểu tượng */
-    margin-right: 10px;
-    margin-left: 10px;
-    border-right: 0.5px solid ;
-    padding-right: 15px;
-    transition: color 0.3s;
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
 
-    &:hover {
-      color: #ffa500; /* Màu cam khi hover */
+    @media (min-width: 1024px) {
+      flex-direction: row;
     }
   }
 
-  .input {
-    flex: 1;
+  .textContainer {
+    max-width: 50%;
+    margin-bottom: 2rem;
+
+    @media (max-width: 1024px) {
+      max-width: 100%;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+
+      @media (min-width: 1024px) {
+        font-size: 3.75rem;
+      }
+    }
+
+    p {
+      font-size: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  .shopButton {
+    background: white;
+    color: #2563eb;
+    padding: 0.75rem 2rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    transition: background 0.3s ease;
     border: none;
-    outline: none;
-    font-size: 1rem;
-    color: #333; /* Màu chữ */
-    background: none;
+    &:hover {
+      background: #bfdbfe;
+    }
+  }
 
-    &::placeholder {
-      color: #aaa; /* Màu placeholder */
+  .imageContainer {
+    max-width: 50%;
+
+    @media (max-width: 1024px) {
+      max-width: 100%;
+    }
+
+    img {
+      border-radius: 8px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      width: 100%;
     }
   }
 }
-
-
-  

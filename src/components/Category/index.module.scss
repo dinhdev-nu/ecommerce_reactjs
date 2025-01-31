@@ -1,24 +1,59 @@
-.categoryContainer {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-    margin: 20px 0;
+.categories {
+  padding: 4rem 0;
+  background: #f8f9fa;
+  text-align: center;
+
+  .container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 1rem;
   }
-  
-  .categoryButton {
-    padding: 10px 20px;
-    background-color: #e0c97b;
-    color: #fff;
-    font-size: 14px;
+
+  .title {
+    font-size: 2rem;
     font-weight: bold;
-    border-radius: 25px;
-    border: none;
+    margin-bottom: 2rem;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .categoryItem {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+
+    &:hover .image {
+      transform: scale(1.1);
+    }
+    
+    .image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .categoryName {
+      color: white;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
   }
-  
-  .categoryButton:hover {
-    background-color: #d4b96b;
-    transform: scale(1.05);
-  }
-  
+}
+
+
+

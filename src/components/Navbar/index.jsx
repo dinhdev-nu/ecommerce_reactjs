@@ -1,39 +1,51 @@
-import React from "react";
-import styles from './index.module.scss'
-import { FaCartPlus } from 'react-icons/fa'
+import React, { useState } from "react";
+import styles from "./index.module.scss";
+import logo from '../../assets/logo1.png'
+import { FiSearch, FiShoppingCart, FiUser, FiMenu, FiX } from "react-icons/fi";
 
-const NavBar = () => {
-    
-    return (
-        <header className={styles.header}>
-            <nav className={styles.navbar} >
-                <h1 className={styles.logo} >ShopBee</h1>
-                <div style={{display: 'flex', gap: '50px'}} >
-                    <li className={styles.navLinks}>
-                        <a href="/">HOME</a>
-                        <a href="/">CART</a>
-                        <a href="/">PRE ORDER</a>
-                    </li>
-                    <div style={{display: 'flex', gap: '50px'}}>
-                        <div>
-                            <button>
-                                Login
-                            </button>
-                            <button>
-                                Logout
-                            </button>
-                        </div>
-                        <div>
-                            <button>
-                                <FaCartPlus />
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-        </header>
-    )
+const Navbar = ({ isDarkMode, toggleDarkMode }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-}
+  return (
+    <header className={`${styles.navbar} ${isDarkMode ? styles.dark : ""}`}>
+      <div className={styles.container}>
+        {/* Left Section */}
+        <div className={styles.left}>
+          <button onClick={() => setIsMenuOpen(!isMenuOpen)} className={styles.menuButton}>
+            {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+          </button>
+          <img
+            src={logo}
+            alt="Logo"
+            className={styles.logo}
+          />
+        </div>
 
-export default NavBar
+        {/* Center Navigation */}
+        <nav className={`${styles.navLinks} ${isMenuOpen ? styles.open : ""}`}>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Shop</a></li>
+            <li><a href="#">Categories</a></li>
+            <li><a href="#">About</a></li>
+          </ul>
+        </nav>
+
+        {/* Right Section */}
+        <div className={styles.right}>
+          <div className={styles.searchBox}>
+            <FiSearch className={styles.icon} />
+            <input type="text" placeholder="Search products..." />
+          </div>
+          <button className={styles.iconButton}><FiShoppingCart size={24} /></button>
+          <button className={styles.iconButton}><FiUser size={24} /></button>
+          <button onClick={toggleDarkMode} className={styles.iconButton}>
+            {isDarkMode ? "🌞" : "🌙"}
+          </button>
+        </div>
+      </div>
+    </header>
+  );
+};
+
+export default Navbar;

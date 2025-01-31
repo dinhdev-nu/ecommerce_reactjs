@@ -1,41 +1,128 @@
-/* NavBar.module.scss */
+// Variables
+$primary-color: #1e3a8a; // Blue-900
+$dark-bg: #111827; // Gray-900
+$light-bg: #ffffff;
+$text-dark: #1f2937;
+$text-light: #e5e7eb;
 
-.header{
-  position: sticky;
-  top: 0;
-}
+// Navbar styles
 .navbar {
+  position: fixed;
+  width: 100%;
+  background-color: $light-bg;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem 0 0 0;
+  z-index: 50;
+  top: 0;
+  transition: background-color 0.3s ease;
+
+  &.dark {
+    background-color: $dark-bg;
+  }
+  
+
+  .container {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 25px 30px 15px 30px;
-    border-bottom: 1px solid #ccc;
-    background-color: rgba(255, 255, 255, 0.5);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    border-bottom: 3px solid #e0c97b ;
-    z-index: 2;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
   }
-  
-  .logo {
-    width: 70px;
-    height: 70xp;
-  }
-  
-  .navLinks {
+
+  .left {
     display: flex;
-    gap: 20px;
-    list-style: none;
+    align-items: center;
+    gap: 1rem;
+
+    .menuButton {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+
+      @media (max-width: 1024px) {
+        display: block;
+      }
+    }
+
+    .logo {
+      height: 70px;
+    }
   }
-  
-  .navLinks li {
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 500;
-    color: #555;
-    transition: color 0.3s ease;
+
+  .navLinks {
+    ul {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      font-size: 1rem;
+      li a {
+        text-decoration: none;
+        color: $text-dark;
+        font-weight: 500;
+        transition: color 0.3s ease;
+
+        &:hover {
+          color: $primary-color;
+        }
+      }
+
+      @media (max-width: 1024px) {
+        display: none;
+      }
+    }
+
+    &.open {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      width: 100%;
+      background-color: $light-bg;
+      padding: 1rem 0;
+
+      ul {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
   }
-  
-  .navLinks li:hover {
-    color: #e0c97b;
+
+  .right {
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+    padding-right: 10px;
+
+    .searchBox {
+      display: flex;
+      align-items: center;
+      background: #f3f4f6;
+      padding: 0.5rem;
+      border-radius: 20px;
+
+      .icon {
+        color: #6b7280;
+      }
+
+      input {
+        border: none;
+        background: transparent;
+        outline: none;
+        padding-left: 0.5rem;
+      }
+    }
+
+    .iconButton {
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: $primary-color;
+      }
+    }
   }
-  
+}

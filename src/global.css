@@ -2,6 +2,9 @@
 body {
     margin: 0; /* Reset margin */
     padding: 0; /* Reset padding */
-    background-color: #f5f5f5; /* Màu nền mặc định (nếu cần) */
-    color: #333; /* Màu chữ mặc định */
+    background: #f8f9fa;
   }
+
+button{
+  border: none;
+}

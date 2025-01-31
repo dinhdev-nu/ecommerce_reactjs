@@ -1,56 +1,90 @@
-.productList {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 20px;
+.featuredSection {
+  padding: 4rem 0;
+  background-color: #f9fafb;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
 }
 
 .productCard {
-  text-align: center;
-  width: 200px;
-  border: 1px solid #f0f0f0;
+  background: #fff;
   border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  padding: 15px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
 }
 
-.productCard:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+.imageWrapper {
+  position: relative;
+  overflow: hidden;
 }
 
-.productImage {
+.image {
   width: 100%;
-  height: 150px;
+  height: 200px;
   object-fit: cover;
-  border-radius: 10px;
+  transition: transform 0.3s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.addToCart {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: black;
+  font-size: 2rem;
+  background: rgba(0,0,0,0);
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+}
+
+.details {
+  padding: 0 1rem;
 }
 
 .productName {
-  font-size: 16px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  height: 2.5rem;
+}
+
+.price {
+  color: #2563eb;
   font-weight: bold;
-  margin: 10px 0;
-  color: #333;
 }
 
-.productPrice {
-  font-size: 14px;
-  color: #777;
-  margin-bottom: 10px;
-}
-
-.addButton {
-  padding: 8px 16px;
-  background-color: #e0c97b;
-  color: #fff;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.addButton:hover {
-  background-color: #d4b96b;
+.bottom{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  button{
+    background: #2563eb;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+  }
 }
