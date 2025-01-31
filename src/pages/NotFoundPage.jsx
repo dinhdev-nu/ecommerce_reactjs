@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "../styles/NotFound.module.scss";
-import anh from '../assets/backgroundimage.png'
+import anh from '../assets/logo1.png'
 
 const NotFoundPage = () => {
   return (
