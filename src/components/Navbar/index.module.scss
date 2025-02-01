@@ -46,6 +46,11 @@ $text-light: #e5e7eb;
 
     .logo {
       height: 70px;
+      @media (max-width: 1024px) {
+        height: 40px;
+        margin-left: -10px;
+        margin-right: 10px;
+      }
     }
   }
 
@@ -132,4 +137,52 @@ $text-light: #e5e7eb;
       }
     }
   }
+}
+
+
+.userButton{
+  position: relative;
+  .userMenu{
+    position: absolute;
+    background-color: $light-bg;
+    border: 1px solid $text-dark;
+    text-align: left;
+    left: -50%;
+    top: 120%;
+    a{
+      display: block;
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+      color: $text-dark;
+      transition: background-color 0.3s ease;
+
+      &:hover{
+        background-color: $text-light;
+      }
+    }
+    @media screen and (max-width: 1024px){
+      left: -110%;
+    }
+  }
+}
+
+.cartButton{
+  position: relative;
+  .cartMenu{
+    position: absolute;
+    background-color: $light-bg;
+    border: 1px solid $text-dark;
+    text-align: left;
+    width: 10rem;
+    left: -4rem;
+    top: 120%;
+    p{
+      padding: 0.5rem 1rem;
+      color: $text-dark;
+      display: block;
+      text-wrap: nowrap;
+      text-align: center;
+    }
+  }
+
 }

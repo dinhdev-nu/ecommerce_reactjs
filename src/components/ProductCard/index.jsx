@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaHeart, FaRegHeart, FaShare, FaMinus, FaPlus } from "react-icons/fa";
 import { MdShoppingCart } from "react-icons/md";
 import styles from "./index.module.scss";
+import Comment from "../Comment";
 
 
 
@@ -92,8 +93,9 @@ const ProductComponent = () => {
         </div>
         <ProductTabs product={product} />
 
-        <h1>CUSTOM REVIEWS AND COMMENTS</h1>
+        <Comment />
       </div>
+      <h1></h1>
     </div>
 
   );

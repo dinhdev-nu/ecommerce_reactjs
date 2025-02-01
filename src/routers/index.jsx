@@ -4,6 +4,7 @@ import NotFoundPage from '../pages/NotFoundPage'
 import HomePage from '../pages/HomePage'
 import Access from '../components/Access'
 import ProductDetail from '../pages/ProductDetail'
+import ProductForm from '../components/ProductForm'
 
 const router = createBrowserRouter ([
     {
@@ -25,6 +26,10 @@ const router = createBrowserRouter ([
     {
         path: 'product',
         element: <ProductDetail/>
+    },
+    {
+        path: 'product/new',
+        element: <ProductForm/>
     },
     {
         path: '*',

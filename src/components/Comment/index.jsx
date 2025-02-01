@@ -1,58 +1,57 @@
 import styles from "./index.module.scss";
-import { TiShoppingCart } from "react-icons/ti";
+import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 
-const products = [
+const reviews = [
   {
     id: 1,
-    name: "Premium Wireless Headphones",
-    price: "$299.99",
-    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e"
+    user: "John Doe",
+    avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde",
+    rating: 5,
+    comment: "Excellent quality and craftsmanship. Worth every penny!",
+    date: "2023-12-01"
   },
   {
     id: 2,
-    name: "Smart Watch Series X",
-    price: "$399.99",
-    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30"
-  },
-  {
-    id: 3,
-    name: "Leather Crossbody Bag",
-    price: "$129.99",
-    image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3"
-  },
-  {
-    id: 4,
-    name: "Premium Sunglasses",
-    price: "$199.99",
-    image: "https://images.unsplash.com/photo-1572635196237-14b3f281503f"
+    user: "Jane Smith",
+    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
+    rating: 4.5,
+    comment: "Great backpack, but a bit pricey. Overall satisfied with the purchase.",
+    date: "2023-11-28"
   }
 ];
 
-const FeaturedProducts = () => {
+const Comment = () => {
+  const renderStars = (rating) => {
+    const stars = []; 
+    for (let i = 1; i <= 5; i++) {
+      if(i <= rating)
+        stars.push(<FaStar key={i}  />);
+      else if (i - 0.5 === rating)
+        stars.push(<FaStarHalfAlt key={i+1} />);
+    }
+    return stars;
+  }
+  
   return (
-    <section className={styles.featuredSection}>
-      <div className={styles.container}>
-        <h2 className={styles.title}>Featured Products</h2>
-        <div className={styles.grid}>
-          {products.map((product) => (
-            <div key={product.id} className={styles.productCard}>
-              <div className={styles.imageWrapper}>
-                <img src={product.image} alt={product.name} className={styles.image} />
-                <button className={styles.addToCart}><TiShoppingCart/></button>
+    <div className={styles.reviewsSection}>
+      <h2 className={styles.title}>Customer Reviews</h2>
+      <div className={styles.reviewsList}>
+        {reviews.map((review) => (
+          <div key={review.id} className={styles.reviewCard}>
+            <div className={styles.reviewHeader}>
+              <img src={review.avatar} alt={review.user} className={styles.avatar} />
+              <div className={styles.reviewInfo}>
+                <h3 className={styles.userName}>{review.user}</h3>
+                <div className={styles.stars}>{renderStars(review.rating)}</div>
               </div>
-              <div className={styles.details}>
-                <h3 className={styles.productName}>{product.name}</h3>
-                <div className={styles.bottom}>
-                  <p className={styles.price}>{product.price}</p>
-                  <button className={styles.buy}>Buy</button>
-                </div>
-              </div>
+                <p className={styles.date}>{review.date}</p>
             </div>
-          ))}
-        </div>
+            <p className={styles.comment}>{review.comment}</p>
+          </div>
+        ))}
       </div>
-    </section>
+    </div>
   );
 };
 
-export default FeaturedProducts;
+export default Comment;

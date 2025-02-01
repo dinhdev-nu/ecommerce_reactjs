@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./index.module.scss";
 import logo from '../../assets/logo1.png'
 import { FiSearch, FiShoppingCart, FiUser, FiMenu, FiX } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -38,8 +39,8 @@ const Navbar = () => {
             <FiSearch className={styles.icon} />
             <input type="text" placeholder="Search products..." />
           </div>
-          <button className={styles.iconButton}><FiShoppingCart size={24} /></button>
-          <button className={styles.iconButton}><FiUser size={24} /></button>
+          <CartForNavbar />
+          <UserForNavbar />
           <button onClick={toggleDarkMode} className={styles.iconButton}>
             {isDarkMode ? "🌞" : "🌙"}
           </button>
@@ -50,3 +51,47 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+const CartForNavbar = () => {
+  const [isCartMenu, setIsCartMenu] = useState(false);
+
+  const toggleCartMenu = () => {
+    setIsCartMenu(!isCartMenu);
+  }
+
+  return (
+    <button 
+    className={`${styles.iconButton} ${styles.cartButton}`}
+    onClick={toggleCartMenu}
+    >
+      <FiShoppingCart size={24} />
+      <span className={styles.cartCount}>0</span>
+      <div className={styles.cartMenu} style={{ display: isCartMenu ? "block" : "none" }}>
+        <p>Your cart is empty</p>
+      </div>
+    </button>
+  )
+
+}
+
+const UserForNavbar = () => {
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+
+  const toogleUserMenu = () => {
+    setIsUserMenuOpen(!isUserMenuOpen);
+  } 
+
+  return (
+    <button 
+    className={ `${styles.iconButton} ${styles.userButton}` }
+    onClick={toogleUserMenu}
+    >
+      <FiUser size={24} />
+      <div className={styles.userMenu} style={{ display: isUserMenuOpen ? "block" : "none" }}>
+        <Link to="/login">Login</Link>
+        <Link to="/signup">Register</Link>
+        <Link to="/profile">Profile</Link>
+      </div>
+    </button>
+  )
+}
