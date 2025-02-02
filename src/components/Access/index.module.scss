@@ -23,6 +23,10 @@ $border-radius: 8px;
   border-radius: $border-radius;
   overflow: hidden;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 }
 
 // Left side styles
@@ -68,7 +72,11 @@ $border-radius: 8px;
     font-size: 1.5rem;
     margin-bottom: 20px;
   }
-
+  span{
+    color: red;
+    font-size: 0.7rem;
+    margin-top: -10px;
+  }
   .Form {
     display: flex;
     flex-direction: column;
@@ -90,7 +98,7 @@ $border-radius: 8px;
       position: absolute;
       top: 50%;
       right: 10px;
-      transform: translateY(-50%);
+      transform: translate(-50%, -50%);
       cursor: pointer;
     }
   }
@@ -163,3 +171,4 @@ $border-radius: 8px;
     }
   }
 }
+

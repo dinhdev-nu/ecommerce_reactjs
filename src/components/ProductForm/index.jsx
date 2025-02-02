@@ -48,7 +48,6 @@ const ProductForm = () => {
     try {
       // Simulated API call
       await new Promise(resolve => setTimeout(resolve, 1500));
-      console.log({ ...data, images });
       toast.success("Product registered successfully!");
       reset();
       setImages([]);

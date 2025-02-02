@@ -3,11 +3,12 @@ import axios from "axios";
 
 const callApi = axios.create({
     baseURL: 'http://localhost:3000/v1/api',
-    timeout: 5000,
+    timeout: 10000,
     headers: {
         'Content-Type': 'application/json',
-        'x-api-key': import.meta.env.VITE_X_API_KEY
-    }
+        'x-api-key': import.meta.env.VITE_X_API_KEY 
+    },
+    withCredentials: true,
 })
 
 callApi.interceptors.request.use(

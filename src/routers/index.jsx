@@ -5,6 +5,7 @@ import HomePage from '../pages/HomePage'
 import Access from '../components/Access'
 import ProductDetail from '../pages/ProductDetail'
 import ProductForm from '../components/ProductForm'
+import ListProduct from '../components/ProductsList/index'
 
 const router = createBrowserRouter ([
     {
@@ -18,6 +19,10 @@ const router = createBrowserRouter ([
     {
         path: '/login',
         element: <Access/>
+    },
+    {
+        path: '/products',
+        element: <ListProduct/>
     },
     {
         path: '/signup',

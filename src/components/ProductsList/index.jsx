@@ -1,7 +1,10 @@
 import styles from "./index.module.scss";
 import { TiShoppingCart } from "react-icons/ti";
+import { useEffect, useState } from "react";
+import callApi from "../../utils/axiosConfig";
 
-const products = [
+
+const products1 = [
   {
     id: 1,
     name: "Premium Wireless Headphones",
@@ -29,12 +32,26 @@ const products = [
 ];
 
 const FeaturedProducts = () => {
+  const [ products, setProducts] = useState()
+
+
+  useEffect( () => {
+    const effect = async () => {
+        try {
+        const response = await callApi.get('/products')
+        console.log('response: ', response.data)
+        } catch (error) {
+        console.error('error fetching products: ', error)
+      }}
+      effect()
+  },[])
+
   return (
     <section className={styles.featuredSection}>
       <div className={styles.container}>
         <h2 className={styles.title}>Featured Products</h2>
         <div className={styles.grid}>
-          {products.map((product) => (
+          {products1.map((product) => (
             <div key={product.id} className={styles.productCard}>
               <div className={styles.imageWrapper}>
                 <img src={product.image} alt={product.name} className={styles.image} />
