@@ -35,16 +35,16 @@ const FeaturedProducts = () => {
   const [ products, setProducts] = useState()
 
 
-  useEffect( () => {
-    const effect = async () => {
-        try {
-        const response = await callApi.get('/products')
-        console.log('response: ', response.data)
-        } catch (error) {
-        console.error('error fetching products: ', error)
-      }}
-      effect()
-  },[])
+  // useEffect( () => {
+  //   const effect = async () => {
+  //       try {
+  //       const response = await callApi.get('/product')
+  //       console.log('response: ', response.data)
+  //       } catch (error) {
+  //       console.error('error fetching products: ', error)
+  //     }}
+  //     effect()
+  // },[])
 
   return (
     <section className={styles.featuredSection}>

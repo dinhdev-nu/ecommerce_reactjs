@@ -1,7 +1,7 @@
 'use strict'
 
 const setToCookie = ({ key, values, expired }) => {
-    let cookie = `${key}=${JSON.stringify(values)}; path=/`
+    let cookie = `${key}=${JSON.stringify(values)}; path=/; secure;`
     expired && (cookie += `max-age=${expired.toString()};`)
     
     // For BE only

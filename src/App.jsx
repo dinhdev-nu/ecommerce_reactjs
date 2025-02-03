@@ -1,7 +1,6 @@
 import { Outlet } from 'react-router-dom'
 import NavBar from './components/Navbar'
 import Footer from './components/Footer'
-import { useEffect, useState } from 'react'
 
 function App() {
 

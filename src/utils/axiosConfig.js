@@ -8,7 +8,7 @@ const callApi = axios.create({
         'Content-Type': 'application/json',
         'x-api-key': import.meta.env.VITE_X_API_KEY 
     },
-    withCredentials: true,
+    withCredentials: true, // cho cookie chạy qua CORS policy vào client
 })
 
 callApi.interceptors.request.use(

@@ -3,12 +3,14 @@ import styles from "./index.module.scss";
 import GoogleLogo from "../../assets/google.png";
 import { FaGithub, FaEye} from "react-icons/fa";
 import { FiAlertCircle } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import * as z from 'zod';
 import { useForm } from "react-hook-form";
 import { zodResolver } from '@hookform/resolvers/zod';
-
+import callApi from "../../utils/axiosConfig";
+import { setMulltiToLocalStorage } from '../../utils/localStorage'
+import { toast } from "react-toastify";
 
 const schema = z.object({
   email: z.string().email('Invalid email'),
@@ -24,19 +26,39 @@ const schema = z.object({
 })
 
 
-const Login = () => {
+const Login = ({ role }) => {
+
+  const navigate = useNavigate();
 
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors, isValid }
   } = useForm({
     resolver: zodResolver(schema),
     mode: 'onChange'
   })
   
-  const onSubmit = ( data ) => {
-    console.log(data);
+  const onSubmit = async( data ) => {
+    try {
+      const path = role ? '/access/signup/shop' : '/access/signup' ;  
+      const response = await callApi.post(path, data);
+      
+      // set token to local storage
+      setMulltiToLocalStorage({
+        "_DEV_2": response.data.metadata.token,
+        "_IT_YOU": response.data.metadata.user
+      })
+
+      toast.success(response.data.message)
+      navigate('/');
+    } catch (error) {
+      toast.error(error.response.data.message);
+
+      setError("email", { message: " Email incorret ! " });
+      setError("password", { message: " Password incorret ! " });
+    }    
   }
 
   

@@ -8,6 +8,9 @@ import { Link,useNavigate } from "react-router-dom";
 import * as z from 'zod';
 import { useForm } from "react-hook-form";
 import { zodResolver } from '@hookform/resolvers/zod';
+import { toast } from "react-toastify"
+
+import callAPI from '../../utils/axiosConfig';
 
 
 
@@ -29,7 +32,7 @@ const schema = z.object({
 })
 
 
-const Signup = () => {
+const Signup = ({role}) => {
   const navigate = useNavigate();
 
   const {
@@ -41,12 +44,25 @@ const Signup = () => {
     mode: 'onChange'
   })
 
-  const onSubmit = ( data ) => {
-    console.log(data);
+  const onSubmit = async( data ) => {
+    try {
+      const path = role ? '/access/signup/shop' : '/access/signup' ;  
+      const response = await callAPI.post(path , data);
+      toast.success(response.data.message , {
+        style: {
+          padding: '30px',
+        }
+      });
+      navigate('/login');
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={styles.signupRight}>
+    <>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.signupRight}>
         <h2>Create Account</h2>
         <div className={styles.Form}>
           <input type="text" {...register("name")} placeholder="Full Name" />
@@ -72,7 +88,8 @@ const Signup = () => {
             </button>
           <button className={styles.githubBtn}><i><FaGithub/></i>Sign up with Github</button>
         </div>
-      </form>
+      </form> 
+    </>
   )
 }
 
