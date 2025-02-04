@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import styles from "./index.module.scss";
 import logo from '../../assets/logo1.png'
-import { FiSearch, FiMenu, FiX } from "react-icons/fi";
+import { FiSearch, FiShoppingCart, FiUser, FiMenu, FiX } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
-import CartForNavbar from "./cart";
-import UserForNavbar from "./user";
+import { getFromLocalStorage } from '../../utils/localStorage'
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -29,7 +29,7 @@ const Navbar = () => {
         <nav className={`${styles.navLinks} ${isMenuOpen ? styles.open : ""}`}>
           <ul onClick={() => setIsMenuOpen(false)}>  {/* Đóng menu khi click vào link */}
             <li><a href="#">Home</a></li>
-            <li><a href="#">My Shop</a></li>
+            <li><a href="#">Shop</a></li>
             <li><a href="#">Categories</a></li>
             <li><a href="#">About</a></li>
           </ul>
@@ -54,4 +54,51 @@ const Navbar = () => {
 
 export default Navbar;
 
+const CartForNavbar = () => {
+  const [isCartMenu, setIsCartMenu] = useState(false);
 
+  const toggleCartMenu = () => {
+    setIsCartMenu(!isCartMenu);
+  }
+
+  return (
+    <button 
+    className={`${styles.iconButton} ${styles.cartButton}`}
+    onClick={toggleCartMenu}
+    >
+      <FiShoppingCart size={24} />
+      <span className={styles.cartCount}>0</span>
+      <div className={styles.cartMenu} style={{ display: isCartMenu ? "block" : "none" }}>
+        <p>Your cart is empty</p>
+      </div>
+    </button>
+  )
+
+}
+
+const UserForNavbar = () => {
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+
+  const toogleUserMenu = () => {
+    setIsUserMenuOpen(!isUserMenuOpen);
+  } 
+
+  const userName = getFromLocalStorage('_IT_YOU').name || ''
+
+  return (
+    <button 
+    className={ `${styles.iconButton} ${styles.userButton}` }
+    onClick={toogleUserMenu}
+    style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
+      <FiUser size={24} />
+      <div className={styles.userMenu} style={{ display: isUserMenuOpen ? "block" : "none" }}>
+        <Link to="/login">Login</Link>
+        <Link to="/signup">Register</Link>
+        { userName && <Link to="/logout">Logout</Link> }
+        <Link to="/ccount">Account</Link>
+      </div>
+      <span>{userName}</span>
+    </button>
+  )
+}

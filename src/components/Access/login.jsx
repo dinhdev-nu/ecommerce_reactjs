@@ -42,8 +42,10 @@ const Login = ({ role }) => {
   
   const onSubmit = async( data ) => {
     try {
-      const path = role ? '/access/signup/shop' : '/access/signup' ;  
-      const response = await callApi.post(path, data);
+      const path = role ? '/access/login/shop' : '/access/login' ;  
+      const response = await callApi.post(path, data, {
+        withCredentials: true
+      });
       
       // set token to local storage
       setMulltiToLocalStorage({

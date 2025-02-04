@@ -37,6 +37,10 @@ const router = createBrowserRouter ([
         element: <ProductForm/>
     },
     {
+        path: '/404',
+        element: <NotFoundPage/>
+    },
+    {
         path: '*',
         element: <NotFoundPage/>
     }
