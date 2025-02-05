@@ -1,0 +1,137 @@
+.statCard {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.chartContainer {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+
+.quickStats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .statCard {
+    border-radius: 0.5rem;
+    padding: 1rem 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+  }
+  .statCard.dark {
+    background-color: #1f2937;
+  }
+  
+  .statCard.light {
+    background-color: white;
+  }
+  
+  .iconContainer {
+    display: flex;
+    align-items: center;
+  }
+  
+  .icon {
+    border-radius: 50%;
+    padding: 0.75rem;
+    display: flex;
+    align-items: center;
+    color: white;
+    justify-content: center;
+  }
+  .textContainer {
+    margin-left: 1rem;
+  }
+  
+  .title {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+  
+  .value {
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+  .bgBlue {
+    background-color: #3b82f6;
+  }
+  
+  .bgGreen {
+    background-color: #10b981;
+  }
+  
+  .bgPurple {
+    background-color: #8b5cf6;
+  }
+  
+  .bgYellow {
+    background-color: #fbbf24;
+  }
+}
+
+.tableContainer {
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+  margin-top: 2rem;
+  background-color: white;
+}
+
+.heading {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.thead {
+  th{
+    font-size: 1rem;
+    font-weight: 600;
+    border-bottom: 2px solid #e5e7eb;
+  }
+
+}
+
+.tableWrapper {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  text-align: left;
+}
+
+.th {
+  padding-bottom: 0.75rem;
+  font-weight: 500;
+}
+
+.td {
+  padding: 0.75rem 0;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.product {
+  display: flex;
+  align-items: center;
+}
+
+.image {
+  margin-right: 0.75rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 0.5rem;
+  object-fit: cover;
+}
+

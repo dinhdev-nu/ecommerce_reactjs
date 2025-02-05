@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./index.module.scss";
 import { FaGithub, FaFacebook, FaFacebookMessenger} from "react-icons/fa";
 import { useLocation} from "react-router-dom";
@@ -13,7 +13,13 @@ const Access = () => {
 
   const currentUrl = useLocation();
   const isLogin = currentUrl.pathname === '/login';
-    
+
+  useEffect(() => {
+    if(currentUrl.search === '?r=5') {
+      setRole(true);
+    }
+  }, [currentUrl.search])
+
   return (
     <div className={styles.container}>
       <div className={styles.signupContainer}>
@@ -22,7 +28,7 @@ const Access = () => {
           <div style={{ marginTop : '-30px'}}>
             <h2>Wellcome 🐝 {role ? 'Shop' : 'Customer' }!</h2>
             <div onClick={() => setRole(!role)} style={{marginTop: '20px', cursor: 'pointer'}}>
-              <AnimationText role={role}/>
+              <AnimationText role={!role}/>
             </div>
           </div>
           <div className={styles.socialIcons}>

@@ -1,0 +1,122 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  transition: background-color 0.3s ease;
+  &.dark {
+    background-color: #1f2937;
+    
+  }
+}
+
+.sidebar {
+  width: 250px;
+  background-color: white;
+  border-right: 1px solid #e5e7eb;
+  transition: background-color 0.3s ease;
+  height: 100%;
+  position: fixed;
+  z-index: 1;
+  &.darkSidebar {
+    background-color: #374151;
+    text-wrap: nowrap;
+  }
+  @media (max-width: 1024px) {
+    display: none;    
+  }
+  
+}
+
+.menuButton{
+  @media (min-width: 1024px) {
+    display: none;
+  }
+}
+.openBtn{
+  margin-left: 15rem;
+}
+.open{
+  display: block;
+}
+
+.logoContainer {
+  display: flex;
+  justify-content: center;
+  padding: 16px;
+}
+
+.logo {
+  height: 80px;
+}
+
+.navMenu {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 16px;
+  span{
+    margin-right: 7px;
+  }
+  @media (max-width: 1024px) {
+    text-wrap: nowrap;
+
+  }
+}
+
+.navItem {
+  background: none;
+  border: none;
+  padding: 10px 20px;
+  text-align: left;
+  font-size: 16px;
+  cursor: pointer;
+  color: #4b5563;
+  transition: background 0.3s;
+  border-radius: 10px;
+}
+
+.mainContent {
+  flex: 1;
+  padding: 2rem;
+  padding-left: 18rem;
+  width: 70%;
+  box-sizing: border-box;
+  
+  @media (max-width: 1024px) {
+    width: 100%;    
+    padding-left: 2rem;
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.iconButton {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #6b7280;
+  transition: color 0.3s;
+  
+  &:hover {
+    color: #1f2937;
+  }
+}
+.active{
+  background-color: #3b82f6;
+  color: black;
+}

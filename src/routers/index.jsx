@@ -6,6 +6,7 @@ import Access from '../components/Access'
 import ProductDetail from '../pages/ProductDetail'
 import ProductForm from '../components/ProductForm'
 import ListProduct from '../components/ProductsList/index'
+import DashboardPage from '../pages/Dashboard'
 
 const router = createBrowserRouter ([
     {
@@ -19,14 +20,19 @@ const router = createBrowserRouter ([
     {
         path: '/login',
         element: <Access/>
-    },
-    {
-        path: '/products',
-        element: <ListProduct/>
+
     },
     {
         path: '/signup',
         element: <Access/>
+    },
+    {
+        path: '/dashboard',
+        element: <DashboardPage/>
+    },
+    {
+        path: '/products',
+        element: <ListProduct/>
     },
     {
         path: 'product',

@@ -63,12 +63,13 @@ $text-light: #e5e7eb;
       font-size: 1rem;
       transition: all 0.3s ease-in-out;
 
-      li a {
+      li a, span {
         text-decoration: none;
         color: $text-dark;
         font-weight: 500;
         font-size: 1.1rem;
         transition: color 0.3s ease;
+        cursor: pointer;
 
         &:hover {
           color: $primary-color;
@@ -185,4 +186,15 @@ $text-light: #e5e7eb;
     }
   }
 
+}
+
+.accessButton{
+  background-color: #007bff;
+  color: #fff;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 20px;
+  font-weight: bold;
+  transition: background-color 0.3s , transform 0.2s;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
 }

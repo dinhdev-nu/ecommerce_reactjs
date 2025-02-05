@@ -5,6 +5,9 @@ import { FiSearch, FiMenu, FiX } from "react-icons/fi";
 
 import CartForNavbar from "./cart";
 import UserForNavbar from "./user";
+import { getFromLocalStorage } from "../../utils/localStorage";
+import { toast } from "react-toastify";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -29,7 +32,7 @@ const Navbar = () => {
         <nav className={`${styles.navLinks} ${isMenuOpen ? styles.open : ""}`}>
           <ul onClick={() => setIsMenuOpen(false)}>  {/* Đóng menu khi click vào link */}
             <li><a href="#">Home</a></li>
-            <li><a href="#">My Shop</a></li>
+            <li><MyShop /></li>
             <li><a href="#">Categories</a></li>
             <li><a href="#">About</a></li>
           </ul>
@@ -53,5 +56,44 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
+const MyShop = () => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    const role = getFromLocalStorage("roles");
+
+    if (role === "shop") {
+      useNavigate('/product')
+    } else {
+      toast.info(
+        <div style={{ textAlign: "center" }}>
+          <p>You are not a shop owner</p>
+          <div style={{ display: "flex", gap: "10px", marginTop: "10px" }}>
+            <button
+              onClick={() => navigate(`/login?r=5`)}
+              className={styles.accessButton}
+            >
+              🔑 Go to Login
+            </button>
+            <button
+              onClick={() => navigate(`/signup?r=5`)}
+              className={styles.accessButton}
+            >
+              📝 Sign Up
+            </button>
+          </div>
+        </div>
+      );
+      console.log("You need to login as a shop to access this page.");
+    }
+  }
+  return (
+    <span className={styles.myShop} onClick={handleClick}>
+      My Shop
+    </span>
+  )
+}
 
 
