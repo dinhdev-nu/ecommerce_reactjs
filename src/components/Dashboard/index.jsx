@@ -8,7 +8,7 @@ import {
 import logo from "../../assets/logo1.png";
 import Home from "../DashboardHome";
 import ProductManage from "../DashboardProduct";
-import debounce from 'lodash/debounce'
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -20,6 +20,7 @@ const ShopManagerDashboard = () => {
   const [showNotifications, setShowNotifications] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
+  const nagitive = useNavigate()
 
   const sidebarItems = [
     { icon: <FiHome />, label: "Dashboard", id: "dashboard" },
@@ -37,6 +38,7 @@ const ShopManagerDashboard = () => {
           <img
             src={logo}
             className={styles.logo}
+            onClick={() => nagitive('/')}
           />
         </div>
         <nav className={styles.navMenu}>

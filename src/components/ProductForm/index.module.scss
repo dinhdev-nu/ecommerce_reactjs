@@ -1,26 +1,42 @@
 .container {
-  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(to bottom right, #ebf4ff, #c3dafe);
-  padding: 1.5rem;
+  padding: 0.5rem 1.5rem 1.5rem 1.5rem;
+  width: 700px;
+}
+
+.overlay {
+  position: absolute;
+  top: 3rem;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  right: 3rem;
+  padding: 3px;
+
 }
 
 .formWrapper {
+  position: relative;
+
   width: 100%;
-  max-width: 600px;
+  max-width: 700px;
   background: white;
-  border-radius: 1rem;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   padding: 2rem;
+  max-height: 86vh;
+  border-radius: 1%;
+  overflow-y: auto;
+  scrollbar-width: none;
 }
 
 .title {
   font-size: 1.875rem;
   font-weight: 600;
   color: #2d3748;
-  margin-bottom: 1.5rem;
+  margin-top: 0.5rem;
 }
 
 .form {
@@ -34,8 +50,9 @@
   position: relative;
   
   .input {
+    box-sizing: border-box;
     position: relative;
-    width: 94.5%;
+    width: 100%;
     padding: 0.75rem 1rem;
     border: 2px solid #cbd5e0;
     border-radius: 0.5rem;

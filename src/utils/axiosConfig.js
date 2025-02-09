@@ -34,32 +34,33 @@ callApi.interceptors.request.use(
 callApi.interceptors.response.use(
     response => response,
     async error => {
-        const originalRequest = error.config
-        if(error.response.status === 401 && !originalRequest._retry){
-            originalRequest._retry = true
-            try {
-                const role = getFromLocalStorage('_IT_YOU')?.role
-                const response = await callApi.post('/access/refreshtoken/' + role , {}, {
-                    withCredentials: true,
-                    headers: {
-                        'x-lient-id': getFromLocalStorage('_IT_YOU')?._id
-                    }
-                })
-                const newToken = response.data.metadata.token
-
-                setToLocalStorage('_DEV_2', newToken)
-
-                originalRequest.headers['authorization'] = `Bearer ${newToken}`
-
-                return callApi(originalRequest) 
-
-            } catch (error) {
-                removeFromLocalStorage('_DEV_2')
-                removeFromLocalStorage('_IT_YOU')
-                window.location.href = '/login'
-            }
-        }
         if(error.response){
+            const originalRequest = error.config
+        if(error.response.status === 401 && !originalRequest._retry){
+            // originalRequest._retry = true
+            // try {
+            //     const role = getFromLocalStorage('_IT_YOU')?.roles
+            //     const response = await callApi.post('/access/refreshtoken/' + role , {}, {
+            //         withCredentials: true,
+            //         headers: {
+            //             'x-lient-id': getFromLocalStorage('_IT_YOU')?._id
+            //         }
+            //     })
+            //     const newToken = response.data.metadata.token
+
+            //     setToLocalStorage('_DEV_2', newToken)
+
+            //     originalRequest.headers['authorization'] = `Bearer ${newToken}`
+
+            //     return callApi(originalRequest) 
+
+            // } catch (error) {
+            //     removeFromLocalStorage('_DEV_2')
+            //     removeFromLocalStorage('_IT_YOU')
+            //     window.location.href = '/login'
+            // }
+            console.error('Token expired', error)
+        }
             switch(error.response.status){
                 case 403:
                     console.error("Forbidden! You don't have permission.")

@@ -62,10 +62,10 @@ const MyShop = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    const role = getFromLocalStorage("roles");
+    const role = getFromLocalStorage("_IT_YOU");
 
-    if (role === "shop") {
-      useNavigate('/product')
+    if (role?.roles === "shop") {
+      navigate('/dashboard')
     } else {
       toast.info(
         <div style={{ textAlign: "center" }}>

@@ -1,17 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
-import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from "zod";
+import { zodResolver } from '@hookform/resolvers/zod';
 import { motion } from "framer-motion";
 import { FiAlertCircle, FiUpload, FiX } from "react-icons/fi";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import styles from "./index.module.scss";
 
 import _ from 'lodash'
 import callApi from '../../utils/axiosConfig'
-import { categories } from '../../const'
-import { getFromLocalStorage } from "../../utils/localStorage";
-
 
 const schema = z.discriminatedUnion("product_type", [
   z.object({
@@ -19,7 +16,6 @@ const schema = z.discriminatedUnion("product_type", [
     product_name: z.string().min(3, "Product name must be at least 3 characters"),
     product_description: z.string().optional(),
     product_price: z.number().min(0, "Price must be positive"),
-    product_quantity: z.number().min(0, "Quantity must be positive"),
     brand: z.string().min(1, "Brand must be at least 1 character"),
     model: z.string().min(1, "Model must be at least 1 character"),
     power: z.string().min(1, "Power must be at least 1 character"),
@@ -29,7 +25,6 @@ const schema = z.discriminatedUnion("product_type", [
     product_name: z.string().min(3, "Product name must be at least 3 characters"),
     product_description: z.string().optional(),
     product_price: z.number().min(0, "Price must be positive"),
-    product_quantity: z.number().min(0, "Quantity must be positive"),
     size: z.string().min(1, "Size must be at least 1 character"),
     color: z.string().min(1, "Color must be at least 1 character"),
     material: z.string().min(1, "Material must be at least 1 character")
@@ -39,7 +34,6 @@ const schema = z.discriminatedUnion("product_type", [
     product_name: z.string().min(3, "Product name must be at least 3 characters"),
     product_description: z.string().optional(),
     product_price: z.number().min(0, "Price must be positive"),
-    product_quantity: z.number().min(0, "Quantity must be positive"),
     material: z.string().min(1, "Material must be at least 1 character"),
     weight: z.string().min(1, "Weight must be at least 1 character"),
     color: z.string().min(1, "Color must be at least 1 character"),
@@ -48,23 +42,34 @@ const schema = z.discriminatedUnion("product_type", [
 ]);
 
 
-const ProductForm = ({ onClose, onMount }) => {
+const EditProductForm = ({ onClose, product, onMount }) => {
   const [images, setImages] = useState('');
   const [loading, setLoading] = useState(false);
-
+  const imageOld = useRef(product.product_thumb)
 
   const {
     register,
     handleSubmit,
     reset,
-    watch,
     formState: { errors, isValid },
   } = useForm({
     resolver: zodResolver(schema),
     mode: "onChange",
+    defaultValues: {
+      product_name: product.product_name,
+      product_description: product.product_description,
+      product_price: product.product_price,
+      product_type: product.product_type,
+      product_quantity: product.product_quantity,
+      size: product.product_attributes?.size,
+      color: product.product_attributes?.color,
+      material: product.product_attributes?.material,
+      brand: product.product_attributes?.brand,
+      model: product.product_attributes?.model,
+      power: product.product_attributes?.power,
+      weight: product.product_attributes?.weight
+    }
   });
-
-  const selectType = watch("product_type");
 
   const handleImageDrop = async (e) => {
     e.preventDefault()
@@ -92,6 +97,12 @@ const ProductForm = ({ onClose, onMount }) => {
 
   };
   const onSubmit = async (data) => {
+    if (product.status !== 'draft') {
+      console.log(data)
+      toast.error("Can't edit puslish product! Please change status to draft")
+      onClose(false)
+      return
+    }
     setLoading(true);
     try {
       const payload = _.pick(data, [
@@ -101,23 +112,31 @@ const ProductForm = ({ onClose, onMount }) => {
         "product_type",
         "product_quantity"
       ])
-      payload['product_attributes'] = _.omit(data, Object.keys(payload))
-      payload['product_thumb'] = images
-      payload['product_shop'] = getFromLocalStorage('_IT_YOU')._id
-      // Simulated API call
-      const response = await callApi.post('/product', payload, {
+      payload['product_attributes'] = _.omit(data, [
+        "product_name",
+        "product_description",
+        "product_price",
+        "product_type",
+        "product_quantity"
+      ])
+      payload['product_thumb'] = images ? images : imageOld.current
+      console.log(payload)
+      // // Simulated API call
+      await callApi.put('/product/update/' + product._id, payload, {
         requiresAuth: true
       })
-      if (response.status !== 200) {
-        throw new Error(response.data.message)
-      }
       toast.success("Product registered successfully!");
       reset();
       setImages('')
-      onMount();
-      console.log(data);
+      onClose(true);
+      onMount()
+      if (images !== imageOld.current && images) {
+        callApi.post('/upload/remove', {
+          url: imageOld.current
+        })
+      }
     } catch (error) {
-      toast.error("Failed to register product");
+      toast.error("Failed to update product");
     } finally {
       setLoading(false);
     }
@@ -138,10 +157,10 @@ const ProductForm = ({ onClose, onMount }) => {
   }
 
   return (
-    <div className={styles.container} >
+    <div className={styles.container}>
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className={styles.formWrapper}>
         <div className={styles.overlay} onClick={() => handleClose()}><FiX /></div>
-        <h2 className={styles.title}>Product Registration</h2>
+        <h2 className={styles.title}>Product Edit</h2>
         <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
           <div className={styles.inputGroup}>
             <input type="text" {...register("product_name")} placeholder=" " className={styles.input} />
@@ -170,39 +189,21 @@ const ProductForm = ({ onClose, onMount }) => {
           </div>
 
 
-          <div className={styles.grid}>
+          <div className={styles.grid} style={{ gridTemplateColumns: "repeat(2, 1fr)", marginBottom: '1rem' }}>
             <div className={styles.inputGroup}>
               <input type="number" step="0.01" {...register("product_price", { valueAsNumber: true })} placeholder=" " className={styles.input} />
               <label className={styles.label}>Price *</label>
               <SpanError errors={errors.product_price} />
             </div>
-
-            <div className={styles.inputGroup}>
-              <select {...register("product_type")}
-                className={styles.input}
-                style={{ width: '100%', paddingLeft: '1rem' }}
-              >
-                <option value="">Select a category</option>
-                {categories.map((category) => (
-                  <option key={category} value={category}>{category}</option>
-                ))}
-              </select>
-              <SpanError errors={errors?.product_type} />
-            </div>
           </div>
           { /* render commponent */}
-          {selectType === 'Clothing' && (<Clothing_Atributes register={register} errors={errors} />)}
-          {selectType === 'Electronics' && (<Electrics_Atributes register={register} errors={errors} />)}
-          {selectType === 'Furniture' && (<Furniture_Atributes register={register} errors={errors} />)}
+          {product.product_type === 'Clothing' && (<Clothing_Atributes register={register} errors={errors} />)}
+          {product.product_type === 'Electronics' && (<Electrics_Atributes register={register} errors={errors} />)}
+          {product.product_type === 'Furniture' && (<Furniture_Atributes register={register} errors={errors} />)}
 
-          <div className={styles.inputGroup}>
-            <input type="number" {...register("product_quantity", { valueAsNumber: true })} placeholder=" " className={styles.input} />
-            <label className={styles.label}>Stock Quantity *</label>
-            <SpanError errors={errors.product_quantity} />
-          </div>
           <div className={styles.buttonGroup}>
             <button type="submit" disabled={!isValid || loading} className={styles.submitButton}>
-              {loading ? "Registering..." : "Register Product"}
+              {loading ? "Saving..." : "Save Product"}
             </button>
             <button type="button" onClick={() => { reset(); resetImage(); }} className={styles.resetButton}>
               Reset
@@ -211,20 +212,23 @@ const ProductForm = ({ onClose, onMount }) => {
         </form>
       </motion.div>
     </div >
+
   );
 };
 
 
-export default ProductForm;
+export default EditProductForm;
+
 
 const SpanError = ({ errors }) => {
-
+  if (!errors) {
+    return null
+  }
 
   return (
-    errors &&
     <span className={styles.error}>
       <FiAlertCircle style={{ paddingRight: '5px' }} />
-      {errors.message}
+      {Array.isArray(errors) ? errors.map(err => err.message).join(", ") : errors.message}
     </span>
   );
 }

@@ -6,49 +6,56 @@ import Access from '../components/Access'
 import ProductDetail from '../pages/ProductDetail'
 import ProductForm from '../components/ProductForm'
 import ListProduct from '../components/ProductsList/index'
+import EditProductForm from '../components/ProductForm/edit'
+import ShopManagerDashboard from '../components/Dashboard'
 import DashboardPage from '../pages/Dashboard'
 
-const router = createBrowserRouter ([
+
+const router = createBrowserRouter([
     {
         path: '/',
-        element: <App/>,
+        element: <App />,
         children: [{
             path: '',
-            element: <HomePage/>
+            element: <HomePage />
         }]
     },
     {
         path: '/login',
-        element: <Access/>
+        element: <Access />
 
     },
     {
         path: '/signup',
-        element: <Access/>
+        element: <Access />
     },
     {
         path: '/dashboard',
-        element: <DashboardPage/>
+        element: <ShopManagerDashboard />
     },
     {
         path: '/products',
-        element: <ListProduct/>
+        element: <ListProduct />
     },
     {
         path: 'product',
-        element: <ProductDetail/>
+        element: <ProductDetail />
     },
     {
         path: 'product/new',
-        element: <ProductForm/>
+        element: <ProductForm />
+    },
+    {
+        path: 'product/edit',
+        element: <EditProductForm />
     },
     {
         path: '/404',
-        element: <NotFoundPage/>
+        element: <NotFoundPage />
     },
     {
         path: '*',
-        element: <NotFoundPage/>
+        element: <NotFoundPage />
     }
 
 ])
