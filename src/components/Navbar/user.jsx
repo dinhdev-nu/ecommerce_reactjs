@@ -1,6 +1,6 @@
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./index.module.scss";
-import { FiUser} from "react-icons/fi";
+import { FiUser } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
 import { getFromLocalStorage, removeFromLocalStorage } from '../../utils/localStorage'
@@ -11,26 +11,24 @@ import callApi from '../../utils/axiosConfig'
 
 const UserForNavbar = () => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
-  const [ userName, setUserName ] = useState('')
+  const [userName, setUserName] = useState('')
 
   const toggleUserMenu = () => {
     return setIsUserMenuOpen(!isUserMenuOpen);
-  } 
+  }
 
   useEffect(() => {
     const user = getFromLocalStorage("_IT_YOU")
     setUserName(user?.name || '')
   }, [])
 
-  const handleLogout = async() => {
+  const handleLogout = async () => {
     try {
-      await callApi.post('/access/logout/customer', {}, { 
+      await callApi.post('/access/logout/customer', {}, {
         withCredentials: true,
-        requiresAuth: true 
+        requiresAuth: true
       })
-
-      removeFromLocalStorage('_IT_YOU')
-      removeFromLocalStorage('_DEV_2')
+      localStorage.clear()
       setUserName('')
       toast.success('Logged out successfully')
     } catch (error) {
@@ -39,10 +37,10 @@ const UserForNavbar = () => {
   }
 
   return (
-    <button 
-    className={ `${styles.iconButton} ${styles.userButton}` }
-    onClick={toggleUserMenu}
-    style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    <button
+      className={`${styles.iconButton} ${styles.userButton}`}
+      onClick={toggleUserMenu}
+      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
       <FiUser size={24} />
       <div className={styles.userMenu} style={{ display: isUserMenuOpen ? "block" : "none" }}>
@@ -56,7 +54,7 @@ const UserForNavbar = () => {
             <>
               <Link to="/login">Login</Link>
               <Link to="/signup">Register</Link>
-            </> )
+            </>)
         }
       </div>
       <span>{userName}</span>

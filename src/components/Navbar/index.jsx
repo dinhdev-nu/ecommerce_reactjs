@@ -8,11 +8,11 @@ import UserForNavbar from "./user";
 import { getFromLocalStorage } from "../../utils/localStorage";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
+import callApi from "../../utils/axiosConfig";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
-
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
   };
@@ -95,5 +95,6 @@ const MyShop = () => {
     </span>
   )
 }
+
 
 

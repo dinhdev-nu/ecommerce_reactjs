@@ -36,35 +36,44 @@ callApi.interceptors.response.use(
     async error => {
         if(error.response){
             const originalRequest = error.config
-        if(error.response.status === 401 && !originalRequest._retry){
-            // originalRequest._retry = true
-            // try {
-            //     const role = getFromLocalStorage('_IT_YOU')?.roles
-            //     const response = await callApi.post('/access/refreshtoken/' + role , {}, {
-            //         withCredentials: true,
-            //         headers: {
-            //             'x-lient-id': getFromLocalStorage('_IT_YOU')?._id
-            //         }
-            //     })
-            //     const newToken = response.data.metadata.token
+            
+            if(error.response.status === 401 && !originalRequest._retry ){
+                originalRequest._retry = true
+                try { 
+                    const roles = getFromLocalStorage("_IT_YOU")?.roles;
+                    
+                    const response = await axios.post('http://localhost:3000/v1/api/access/refreshtoken/' + roles, {}, {
+                        withCredentials: true,
+                        headers: {
+                            'Content-Type': 'application/json',
+                            "x-client-id": getFromLocalStorage("_IT_YOU")?._id,
+                            'x-api-key': import.meta.env.VITE_X_API_KEY
+                        }
+                    })
 
-            //     setToLocalStorage('_DEV_2', newToken)
+                    const newToken = response.data.metadata.token
+                    newToken && setToLocalStorage({
+                        key: '_DEV_2',
+                        values: newToken
+                    })
 
-            //     originalRequest.headers['authorization'] = `Bearer ${newToken}`
 
-            //     return callApi(originalRequest) 
+                    originalRequest.headers['authorization'] = `Bearer ${newToken}`
+                    
+                    return callApi(originalRequest)
+                    
 
-            // } catch (error) {
-            //     removeFromLocalStorage('_DEV_2')
-            //     removeFromLocalStorage('_IT_YOU')
-            //     window.location.href = '/login'
-            // }
-            console.error('Token expired', error)
-        }
+                } catch (error) {
+                    window.location.href = '/login'
+                    removeFromLocalStorage('_IT_YOU')
+                    removeFromLocalStorage('_DEV_2')
+                    return Promise.reject(error)
+                }
+            }
             switch(error.response.status){
                 case 403:
                     console.error("Forbidden! You don't have permission.")
-                    window.location.href = '/'
+                    window.location.href = '#'
                     break;
                 case 404:
                     console.error('Not Found')
@@ -72,14 +81,14 @@ callApi.interceptors.response.use(
                     break;
                 case 500:
                     alert('Server error! Please try again later.')
-                    window.location.href = '/'
+                    window.location.href = '#'
                     break;
                 default:
                     console.error('Error:: ', error.response.data.message)
             }
         }
+
         else{
-            console.error("Network error! Check your internet connection.");
             alert("Lỗi kết nối! Vui lòng kiểm tra mạng.");
         }
         return Promise.reject(error)

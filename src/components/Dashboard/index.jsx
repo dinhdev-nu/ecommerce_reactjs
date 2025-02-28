@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import styles from "./index.module.scss";
 import {
-  FiHome, FiBox, FiDatabase, FiShoppingCart,
-  FiBarChart2, FiSettings, FiSun, FiMoon, FiBell,
+  FiHome, FiBox, FiDatabase,
+  FiSettings, FiSun, FiMoon, FiBell,
   FiUser, FiMenu, FiX
 } from "react-icons/fi";
+import { BiSolidDiscount } from "react-icons/bi";
 import logo from "../../assets/logo1.png";
 import Home from "../DashboardHome";
 import ProductManage from "../DashboardProduct";
 import { useNavigate } from "react-router-dom";
+import InventoryDashboard from "../Inventory";
+import DiscountManagement from "../Discount";
 
 
 
@@ -26,8 +29,7 @@ const ShopManagerDashboard = () => {
     { icon: <FiHome />, label: "Dashboard", id: "dashboard" },
     { icon: <FiBox />, label: "Products", id: "products" },
     { icon: <FiDatabase />, label: "Inventory", id: "inventory" },
-    { icon: <FiShoppingCart />, label: "Orders", id: "orders" },
-    { icon: <FiBarChart2 />, label: "Analytics", id: "analytics" },
+    { icon: <BiSolidDiscount />, label: "Discounts", id: "discount" },
     { icon: <FiSettings />, label: "Settings", id: "settings" }
   ];
 
@@ -73,7 +75,13 @@ const ShopManagerDashboard = () => {
           </div>
         </header>
 
-        {activeSection !== 'products' ? <Home /> : <ProductManage />}
+        {
+          activeSection === 'products' ?
+            <ProductManage /> : activeSection === 'inventory' ?
+              <InventoryDashboard /> : activeSection === 'discount' ?
+                <DiscountManagement /> : <Home />
+        }
+
       </div>
 
     </div>

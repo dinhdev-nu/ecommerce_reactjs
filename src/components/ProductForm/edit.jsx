@@ -98,10 +98,9 @@ const EditProductForm = ({ onClose, product, onMount }) => {
   };
   const onSubmit = async (data) => {
     if (product.status !== 'draft') {
-      console.log(data)
       toast.error("Can't edit puslish product! Please change status to draft")
       onClose(false)
-      return
+      return 0;
     }
     setLoading(true);
     try {
@@ -120,7 +119,6 @@ const EditProductForm = ({ onClose, product, onMount }) => {
         "product_quantity"
       ])
       payload['product_thumb'] = images ? images : imageOld.current
-      console.log(payload)
       // // Simulated API call
       await callApi.put('/product/update/' + product._id, payload, {
         requiresAuth: true

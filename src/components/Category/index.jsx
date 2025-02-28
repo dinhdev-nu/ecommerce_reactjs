@@ -1,11 +1,18 @@
 import styles from "./index.module.scss";
 
+import category_1 from '../../assets/category_1.jpg';
+import category_2 from '../../assets/category_2.jpg';
+import category_3 from '../../assets/category_3.jpg';
+import category_4 from '../../assets/category_4.jpg';
+import category_5 from '../../assets/category_5.jpg';
+
+
 const categories = [
-  { name: "Electronics", image: "https://images.unsplash.com/photo-1498049794561-7780e7231661" },
-  { name: "Fashion", image: "https://images.unsplash.com/photo-1445205170230-053b83016050" },
-  { name: "Home & Kitchen", image: "https://images.unsplash.com/photo-1556911220-bff31c812dba" },
-  { name: "Beauty", image: "https://images.unsplash.com/photo-1522338242992-e1a54906a8da" },
-  { name: "Accessories", image: "https://images.unsplash.com/photo-1523170335258-f5ed11844a49" }
+  { name: "Electronics", image: category_1 },
+  { name: "Fashion", image: category_2 },
+  { name: "Home & Kitchen", image: category_3 },
+  { name: "Beauty", image: category_4 },
+  { name: "Accessories", image: category_5 }
 ];
 
 const Categories = () => {

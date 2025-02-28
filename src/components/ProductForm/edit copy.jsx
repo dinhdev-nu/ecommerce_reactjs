@@ -19,7 +19,6 @@ const schema = z.discriminatedUnion("product_type", [
     product_name: z.string().min(3, "Product name must be at least 3 characters"),
     product_description: z.string().optional(),
     product_price: z.number().min(0, "Price must be positive"),
-    product_quantity: z.number().min(0, "Quantity must be positive"),
     brand: z.string().min(1, "Brand must be at least 1 character"),
     model: z.string().min(1, "Model must be at least 1 character"),
     power: z.string().min(1, "Power must be at least 1 character"),
@@ -29,7 +28,6 @@ const schema = z.discriminatedUnion("product_type", [
     product_name: z.string().min(3, "Product name must be at least 3 characters"),
     product_description: z.string().optional(),
     product_price: z.number().min(0, "Price must be positive"),
-    product_quantity: z.number().min(0, "Quantity must be positive"),
     size: z.string().min(1, "Size must be at least 1 character"),
     color: z.string().min(1, "Color must be at least 1 character"),
     material: z.string().min(1, "Material must be at least 1 character")
@@ -39,7 +37,6 @@ const schema = z.discriminatedUnion("product_type", [
     product_name: z.string().min(3, "Product name must be at least 3 characters"),
     product_description: z.string().optional(),
     product_price: z.number().min(0, "Price must be positive"),
-    product_quantity: z.number().min(0, "Quantity must be positive"),
     material: z.string().min(1, "Material must be at least 1 character"),
     weight: z.string().min(1, "Weight must be at least 1 character"),
     color: z.string().min(1, "Color must be at least 1 character"),
@@ -74,47 +71,47 @@ const ProductForm = ({ onClose, onMount }) => {
     const selectFile = e.target.files?.[0] || e.dataTransfer.files?.[0];
     if (!selectFile) return;
 
-    const formData = new FormData()
-    formData.append('file', selectFile)
-    try {
-      const response = await callApi.post('/upload/thumb',
-        formData,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        }
-      )
-      setImages(response.data.url)
-    } catch (error) {
-      toast.error("Failed to upload image")
-    }
+    // const formData = new FormData()
+    // formData.append('file', selectFile)
+    // try {
+    //   const response = await callApi.post('/upload/thumb',
+    //     formData,
+    //     {
+    //       headers: {
+    //         'Content-Type': 'multipart/form-data'
+    //       }
+    //     }
+    //   )
+    //   setImages(response.data.url)
+    // } catch (error) {
+    //   toast.error("Failed to upload image")
+    // }
 
   };
   const onSubmit = async (data) => {
-    setLoading(true);
+    // setLoading(true);
     try {
-      const payload = _.pick(data, [
-        "product_name",
-        "product_description",
-        "product_price",
-        "product_type",
-        "product_quantity"
-      ])
-      payload['product_attributes'] = _.omit(data, Object.keys(payload))
-      payload['product_thumb'] = images
-      payload['product_shop'] = getFromLocalStorage('_IT_YOU')._id
-      // Simulated API call
-      const response = await callApi.post('/product', payload, {
-        requiresAuth: true
-      })
-      if (response.status !== 200) {
-        throw new Error(response.data.message)
-      }
-      toast.success("Product registered successfully!");
-      reset();
-      setImages('')
-      onMount();
+      //   const payload = _.pick(data, [
+      //     "product_name",
+      //     "product_description",
+      //     "product_price",
+      //     "product_type",
+      //     "product_quantity"
+      //   ])
+      //   payload['product_attributes'] = _.omit(data, Object.keys(payload))
+      //   payload['product_thumb'] = images
+      //   payload['product_shop'] = getFromLocalStorage('_IT_YOU')._id
+      //   // Simulated API call
+      //   const response = await callApi.post('/product', payload, {
+      //     requiresAuth: true
+      //   })
+      //   if (response.status !== 200) {
+      //     throw new Error(response.data.message)
+      //   }
+      //   toast.success("Product registered successfully!");
+      //   reset();
+      //   setImages('')
+      //   onMount();
       console.log(data);
     } catch (error) {
       toast.error("Failed to register product");
@@ -191,9 +188,9 @@ const ProductForm = ({ onClose, onMount }) => {
             </div>
           </div>
           { /* render commponent */}
-          {selectType === 'Clothing' && (<Clothing_Atributes register={register} errors={errors} />)}
+          {/* {selectType === 'Clothing' && (<Clothing_Atributes register={register} errors={errors} />)}
           {selectType === 'Electronics' && (<Electrics_Atributes register={register} errors={errors} />)}
-          {selectType === 'Furniture' && (<Furniture_Atributes register={register} errors={errors} />)}
+          {selectType === 'Furniture' && (<Furniture_Atributes register={register} errors={errors} />)} */}
 
           <div className={styles.inputGroup}>
             <input type="number" {...register("product_quantity", { valueAsNumber: true })} placeholder=" " className={styles.input} />
@@ -218,14 +215,13 @@ const ProductForm = ({ onClose, onMount }) => {
 export default ProductForm;
 
 const SpanError = ({ errors }) => {
-  if (!errors) {
-    return null
-  }
+
 
   return (
+    errors &&
     <span className={styles.error}>
       <FiAlertCircle style={{ paddingRight: '5px' }} />
-      {Array.isArray(errors) ? errors.map(err => err.message).join(", ") : errors.message}
+      {errors.message}
     </span>
   );
 }

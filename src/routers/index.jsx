@@ -9,6 +9,10 @@ import ListProduct from '../components/ProductsList/index'
 import EditProductForm from '../components/ProductForm/edit'
 import ShopManagerDashboard from '../components/Dashboard'
 import DashboardPage from '../pages/Dashboard'
+import InventoryDashboard from '../components/Inventory'
+import DiscountManagement from '../components/Discount'
+import CartPage from '../components/Cart'
+import Order from '../components/Order'
 
 
 const router = createBrowserRouter([
@@ -30,6 +34,16 @@ const router = createBrowserRouter([
         element: <Access />
     },
     {
+        path: '/inventory',
+        element: <InventoryDashboard />
+
+    },
+    {
+        path: '/discounts',
+        element: <DiscountManagement />
+
+    },
+    {
         path: '/dashboard',
         element: <ShopManagerDashboard />
     },
@@ -38,7 +52,11 @@ const router = createBrowserRouter([
         element: <ListProduct />
     },
     {
-        path: 'product',
+        path: '/order',
+        element: <Order />
+    },
+    {
+        path: '/product/:id?',
         element: <ProductDetail />
     },
     {
@@ -48,6 +66,10 @@ const router = createBrowserRouter([
     {
         path: 'product/edit',
         element: <EditProductForm />
+    },
+    {
+        path: 'cart',
+        element: <CartPage />
     },
     {
         path: '/404',
