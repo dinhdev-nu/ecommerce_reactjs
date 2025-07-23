@@ -13,6 +13,8 @@ import InventoryDashboard from '../components/Inventory'
 import DiscountManagement from '../components/Discount'
 import CartPage from '../components/Cart'
 import Order from '../components/Order'
+import SearchBar from '../components/SearchBar'
+import Comment from '../components/Comment'
 
 
 const router = createBrowserRouter([
@@ -58,6 +60,10 @@ const router = createBrowserRouter([
     {
         path: '/product/:id?',
         element: <ProductDetail />
+    },
+    {
+        path: 'comment',
+        element: <Comment />
     },
     {
         path: 'product/new',

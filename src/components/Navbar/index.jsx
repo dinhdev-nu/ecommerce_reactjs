@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import styles from "./index.module.scss";
 import logo from '../../assets/logo1.png'
-import { FiSearch, FiMenu, FiX } from "react-icons/fi";
+import { FiMenu, FiX } from "react-icons/fi";
 
 import CartForNavbar from "./cart";
+import SearchBar from "../SearchBar";
 import UserForNavbar from "./user";
 import { getFromLocalStorage } from "../../utils/localStorage";
 import { toast } from "react-toastify";
-import { Link, useNavigate } from "react-router-dom";
-import callApi from "../../utils/axiosConfig";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -40,10 +40,7 @@ const Navbar = () => {
 
         {/* Right Section */}
         <div className={styles.right}>
-          <div className={styles.searchBox}>
-            <FiSearch className={styles.icon} />
-            <input type="text" placeholder="Search products..." />
-          </div>
+          <SearchBar />
           <CartForNavbar />
           <UserForNavbar />
           <button onClick={toggleDarkMode} className={styles.iconButton}>

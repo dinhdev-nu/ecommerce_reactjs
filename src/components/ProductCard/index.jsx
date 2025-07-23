@@ -9,6 +9,7 @@ import callApi from "../../utils/axiosConfig";
 import DiscountButton from "./button";
 
 const OrderLazy = React.lazy(() => import('../Order'))
+const CommentLazy = React.lazy(() => import('../Comment'))
 
 
 
@@ -59,19 +60,18 @@ const ProductComponent = () => {
       product_thumb: product.product_thumb,
       quantity: quantity
     }
-    // try {
-    //   const cart = await callApi.post('/cart/addtocart', payload, {
-    //     requiresAuth: true,
-    //   })
-    //   toast.success('Added to cart')
-    //   setToLocalStorage({
-    //     key: '_MY_CART',
-    //     values: cart.data.metadata.cart_preview
-    //   })
-    // } catch (error) {
-    //   console.log('error: ', error)
-    //   toast.error('Failed to add to cart')
-    // }
+    try {
+      const cart = await callApi.post('/cart/addtocart', payload, {
+        requiresAuth: true,
+      })
+      toast.success('Added to cart')
+      setToLocalStorage({
+        key: '_MY_CART',
+        values: cart.data.metadata.cart_preview
+      })
+    } catch (error) {
+      toast.error('Failed to add to cart')
+    }
 
     console.log(payload)
 
@@ -203,7 +203,7 @@ const ProductComponent = () => {
           </div>
           <ProductTabs product={product} />
 
-          <Comment />
+          <CommentLazy />
         </div>
       )}
       {

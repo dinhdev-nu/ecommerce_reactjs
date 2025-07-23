@@ -1,9 +1,56 @@
-# React + Vite
+# ecommerce_template_ui
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a template for an ecommerce UI built with React and scss modules.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-# ecommerce_shopbee_FE
+- Responsive design
+- Scss modules for styling
+- React components for modularity
+- Basic routing setup with React Router
+- Example product listing and detail pages
+- Simple cart functionality
+- User authentication (login/logout)
+- More features can be added as needed
+
+## Structure
+
+```
+ecommerce_template_ui/
+├── public/
+│   ├── index.html
+├── src/
+│   ├── components/
+│   │   ├── Header.jsx
+│   │   ├── Footer.jsx
+│   │   ├── ProductList.jsx
+│   │   ├── ProductDetail.jsx
+│   │   ├── Cart.jsx
+│   │   └── Login.jsx
+│   ├── pages/
+│   │   ├── Home.jsx
+│   │   ├── Shop.jsx
+│   │   ├── Cart.jsx
+│   │   └── Login.jsx
+│   ├── App.jsx
+│   ├── index.jsx
+│   ├── styles/
+│   │   ├── Header.module.scss
+│   │   ├── Footer.module.scss
+│   │   └── ProductList.module.scss
+│   └── utils/
+│       ├── api.js
+│       └── auth.js
+├── package.json
+├── README.md
+└── .gitignore
+```
+
+## Getting Started
+
+```bash
+git clone https://github.com/your-username/ecommerce_template_ui.git
+cd ecommerce_template_ui
+npm install
+npm run dev
+```
